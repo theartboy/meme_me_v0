@@ -34,6 +34,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Meme Me needs to use your camera to make amazing memes!</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Meme Me needs to access your photos to create your amazing memes!</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Meme Me needs to access your photos to save your amazing memes!</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Impact.ttf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

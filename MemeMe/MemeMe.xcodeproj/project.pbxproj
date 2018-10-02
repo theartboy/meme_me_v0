@@ -12,6 +12,7 @@
 		741BF5A921631B420061A9A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741BF5A721631B420061A9A7 /* Main.storyboard */; };
 		741BF5AB21631B430061A9A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 741BF5AA21631B430061A9A7 /* Assets.xcassets */; };
 		741BF5AE21631B430061A9A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741BF5AC21631B430061A9A7 /* LaunchScreen.storyboard */; };
+		741BF5B7216399CC0061A9A7 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 741BF5B6216399CC0061A9A7 /* Impact.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		741BF5AA21631B430061A9A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		741BF5AD21631B430061A9A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		741BF5AF21631B430061A9A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		741BF5B6216399CC0061A9A7 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +62,17 @@
 				741BF5AA21631B430061A9A7 /* Assets.xcassets */,
 				741BF5AC21631B430061A9A7 /* LaunchScreen.storyboard */,
 				741BF5AF21631B430061A9A7 /* Info.plist */,
+				741BF5B52163997E0061A9A7 /* fonts */,
 			);
 			path = MemeMe;
+			sourceTree = "<group>";
+		};
+		741BF5B52163997E0061A9A7 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				741BF5B6216399CC0061A9A7 /* Impact.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +133,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				741BF5B7216399CC0061A9A7 /* Impact.ttf in Resources */,
 				741BF5AE21631B430061A9A7 /* LaunchScreen.storyboard in Resources */,
 				741BF5AB21631B430061A9A7 /* Assets.xcassets in Resources */,
 				741BF5A921631B420061A9A7 /* Main.storyboard in Resources */,
