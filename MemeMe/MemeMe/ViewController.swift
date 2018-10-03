@@ -30,8 +30,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let memeTextDelegate = MemeTextFieldDelegate()
     var movementAllowed: Bool!
     
-//    var transformIdentity: CGAffineTransform!
-
     let memeTextAttributes: [String: Any] = [
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
         NSAttributedStringKey.font.rawValue: UIFont(name: "Impact", size: 40)!,
@@ -39,6 +37,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSAttributedStringKey.strokeWidth.rawValue: -3.0//neg. value allows for both stroke and fill
         
     ]
+    
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -52,8 +51,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         topTextfield.defaultTextAttributes = memeTextAttributes
         bottomTextfield.defaultTextAttributes = memeTextAttributes
         
-//        topTextfield.text = "TOP"
-//        bottomTextfield.text = "BOTTOM"
         topTextfield.textAlignment = .center
         bottomTextfield.textAlignment = .center
         
@@ -75,6 +72,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             resetNavElements(buttonsEnabled: false)
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
@@ -89,7 +87,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             bottomTextfield.text = "BOTTOM"
             imagePickerView.image = nil
         }
-        
     }
     
     //MARK: Image items
@@ -99,9 +96,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        //set plist properties for camera and library access
         
-        //set tag property for each button in IB
+        //tag property set for each button in IB
         switch sender.tag {
         case 0:
             print("library")
@@ -121,10 +117,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         dismiss(animated: true, completion: nil)
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
     
     func generateMemedImage() -> UIImage {
         //Hide toolbar and navbar
@@ -170,9 +166,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func cancelMeme(_ sender: UIBarButtonItem) {
-//        topTextfield.text = "TOP"
-//        bottomTextfield.text = "BOTTOM"
-//        imagePickerView.image = nil
         resetNavElements(buttonsEnabled: false)
         imagePickerView.transform = CGAffineTransform.identity
     }
@@ -186,6 +179,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     }
+    
     @IBAction func pan(_ sender:UIPanGestureRecognizer) {
         if movementAllowed {
             let translation = sender.translation(in: self.view)
@@ -196,6 +190,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             sender.setTranslation(CGPoint.zero, in: self.view)
         }
     }
+    
     @IBAction func tap(_ sender:UITapGestureRecognizer) {
         if movementAllowed {
             if let view = sender.view {
@@ -215,23 +210,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: Keyboard items
     @objc func keyboardWillShow(_ notification:Notification){
-        //need this to only keyboard view shift on the bottom text or it moves for both textfields
+        //verify it the bottom textfield before shifting keyboard
         if bottomTextfield.isFirstResponder {
             view.frame.origin.y = -getKeyboardHeight(notification)
         }
     }
+    
     @objc func keyboardWillHide(_ notification:Notification){
         view.frame.origin.y = 0
     }
+    
     func getKeyboardHeight(_ notification:Notification)-> CGFloat{
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
     }
+    
     func subscribeToKeyboardNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
+    
     func unsubscribeFromKeyboardNotifications(){
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
@@ -242,7 +241,4 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-

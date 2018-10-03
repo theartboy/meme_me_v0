@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 
-
 class MemeTextFieldDelegate: NSObject, UITextFieldDelegate {
-    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == "TOP" || textField.text == "BOTTOM" {
@@ -26,4 +24,3 @@ class MemeTextFieldDelegate: NSObject, UITextFieldDelegate {
         return true;
     }
 }
-
