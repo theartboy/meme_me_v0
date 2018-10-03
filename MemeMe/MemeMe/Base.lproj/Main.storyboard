@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +16,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Meme Me-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -23,9 +24,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tNu-OE-C6E">
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tNu-OE-C6E">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="9Bi-gL-28t" appends="YES" id="6Wr-gh-xpZ"/>
@@ -33,44 +33,97 @@
                                     <outletCollection property="gestureRecognizers" destination="BqT-rj-mmU" appends="YES" id="GAa-Nj-NnF"/>
                                 </connections>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g2b-qH-Ybc">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2b-qH-Ybc">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem systemItem="flexibleSpace" id="NCa-Pb-SKW"/>
-                                    <barButtonItem title="Album" id="RFt-Bk-5aI"/>
+                                    <barButtonItem title="Album" id="RFt-Bk-5aI">
+                                        <connections>
+                                            <action selector="pickImage:" destination="BYZ-38-t0r" id="Z07-N9-9Bk"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="42" systemItem="fixedSpace" id="x45-pD-iBj"/>
-                                    <barButtonItem systemItem="camera" id="sUS-ax-Wo0"/>
+                                    <barButtonItem systemItem="camera" id="sUS-ax-Wo0">
+                                        <connections>
+                                            <action selector="pickImage:" destination="BYZ-38-t0r" id="0wo-78-Kvk"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="acq-Fa-59k"/>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yLE-PB-4NU">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yLE-PB-4NU">
                                 <rect key="frame" x="16" y="109" width="343" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="pEe-ND-Gp2"/>
+                                </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JqL-VP-TdE">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JqL-VP-TdE">
                                 <rect key="frame" x="16" y="532" width="343" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tNu-OE-C6E" firstAttribute="trailing" secondItem="g2b-qH-Ybc" secondAttribute="trailing" id="0Vh-gp-iDW"/>
+                            <constraint firstItem="yLE-PB-4NU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="45" id="7ve-uy-EUF"/>
+                            <constraint firstItem="tNu-OE-C6E" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="AJm-SH-Iwt"/>
+                            <constraint firstItem="JqL-VP-TdE" firstAttribute="centerX" secondItem="g2b-qH-Ybc" secondAttribute="centerX" id="Njl-R0-VjW"/>
+                            <constraint firstItem="g2b-qH-Ybc" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="S2R-dr-w65"/>
+                            <constraint firstItem="g2b-qH-Ybc" firstAttribute="top" secondItem="JqL-VP-TdE" secondAttribute="bottom" constant="42" id="WDQ-a6-dhP"/>
+                            <constraint firstItem="tNu-OE-C6E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hBK-Ox-T5D"/>
+                            <constraint firstItem="yLE-PB-4NU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="lUN-tf-2Cf"/>
+                            <constraint firstItem="yLE-PB-4NU" firstAttribute="leading" secondItem="JqL-VP-TdE" secondAttribute="leading" id="nZO-77-tWT"/>
+                            <constraint firstAttribute="trailing" secondItem="tNu-OE-C6E" secondAttribute="trailing" id="pO4-Kf-LS0"/>
+                            <constraint firstItem="yLE-PB-4NU" firstAttribute="trailing" secondItem="JqL-VP-TdE" secondAttribute="trailing" id="pdk-mc-it2"/>
+                            <constraint firstItem="tNu-OE-C6E" firstAttribute="leading" secondItem="g2b-qH-Ybc" secondAttribute="leading" id="y6D-a1-8KS"/>
+                            <constraint firstItem="tNu-OE-C6E" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="zLN-Y0-OKE"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="FcL-Gz-MVY">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="49e-0f-cZ0"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Gco-vf-NTe"/>
+                    <navigationItem key="navigationItem" title="Meme Me" id="FcL-Gz-MVY">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="49e-0f-cZ0">
+                            <connections>
+                                <action selector="shareMeme:" destination="BYZ-38-t0r" id="kHp-e7-3BV"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Gco-vf-NTe">
+                            <connections>
+                                <action selector="cancelMeme:" destination="BYZ-38-t0r" id="uKB-f2-flt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="bottomTextfield" destination="JqL-VP-TdE" id="n82-Sh-5BB"/>
+                        <outlet property="cameraButton" destination="sUS-ax-Wo0" id="yFd-t3-UCX"/>
+                        <outlet property="cancelButton" destination="Gco-vf-NTe" id="hGb-cW-kgP"/>
+                        <outlet property="imagePickerView" destination="tNu-OE-C6E" id="PG0-uO-VV9"/>
+                        <outlet property="shareButton" destination="49e-0f-cZ0" id="fXk-m0-tI5"/>
+                        <outlet property="tapGesture" destination="9Bi-gL-28t" id="Rw1-qp-Kng"/>
+                        <outlet property="toolBar" destination="g2b-qH-Ybc" id="LjS-FJ-er8"/>
+                        <outlet property="topTextfield" destination="yLE-PB-4NU" id="fdb-1j-uHG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="9Bi-gL-28t"/>
-                <pinchGestureRecognizer id="zus-nX-p00"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="BqT-rj-mmU"/>
+                <tapGestureRecognizer id="9Bi-gL-28t">
+                    <connections>
+                        <action selector="tap:" destination="BYZ-38-t0r" id="VpV-8G-aaZ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pinchGestureRecognizer id="zus-nX-p00">
+                    <connections>
+                        <action selector="pinch:" destination="BYZ-38-t0r" id="UQd-IE-YBc"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="BqT-rj-mmU">
+                    <connections>
+                        <action selector="pan:" destination="BYZ-38-t0r" id="P0V-YG-rmG"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="877.60000000000002" y="-663.41829085457277"/>
         </scene>
