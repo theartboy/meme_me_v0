@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GenerateMemeViewController.swift
 //  MemeMe
 //
 //  Created by John McCaffrey on 10/1/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class GenerateMemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -53,6 +53,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         unsubscribeFromKeyboardNotifications()
     }
     
+    //MARK: helper functions
     func setupTextField(tf: UITextField, text: String) {
         tf.defaultTextAttributes = [
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
@@ -78,6 +79,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             bottomTextfield.text = "BOTTOM"
             imagePickerView.image = nil
         }
+    }
+    
+    func showHideToolbars(isHidden: Bool) {
+        toolBar.isHidden = isHidden
+        navigationController?.navigationBar.isHidden = isHidden
     }
     
     //MARK: Image items
@@ -115,8 +121,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func generateMemedImage() -> UIImage {
         //Hide toolbar and navbar
-        toolBar.isHidden = true
-        navigationController?.navigationBar.isHidden = true
+        showHideToolbars(isHidden: true)
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -125,8 +130,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsEndImageContext()
         
         //Show toolbar and navbar
-        toolBar.isHidden = false
-        navigationController?.navigationBar.isHidden = false
+        showHideToolbars(isHidden: false)
         
         return memedImage
     }
