@@ -8,13 +8,6 @@
 
 import UIKit
 
-struct Meme {
-    var topText: String
-    var bottomText: String
-    var originalImage: UIImage
-    var memedImage: UIImage
-}
-
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var toolBar: UIToolbar!
@@ -27,33 +20,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     
+     var movementAllowed: Bool!
+    
     let memeTextDelegate = MemeTextFieldDelegate()
-    var movementAllowed: Bool!
-    
-    let memeTextAttributes: [String: Any] = [
-        NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
-        NSAttributedStringKey.font.rawValue: UIFont(name: "Impact", size: 40)!,
-        NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
-        NSAttributedStringKey.strokeWidth.rawValue: -3.0//neg. value allows for both stroke and fill
-        
-    ]
-    
-    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePicker.delegate = self
-        
-        topTextfield.delegate = memeTextDelegate
-        bottomTextfield.delegate = memeTextDelegate
-        
-        topTextfield.defaultTextAttributes = memeTextAttributes
-        bottomTextfield.defaultTextAttributes = memeTextAttributes
-        
-        topTextfield.textAlignment = .center
-        bottomTextfield.textAlignment = .center
-        
+        setupTextField(tf: topTextfield, text: "TOP")
+        setupTextField(tf: bottomTextfield, text: "BOTTOM")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +53,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         unsubscribeFromKeyboardNotifications()
     }
     
+    func setupTextField(tf: UITextField, text: String) {
+        tf.defaultTextAttributes = [
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
+            NSAttributedStringKey.font.rawValue: UIFont(name: "Impact", size: 40)!,
+            NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
+            NSAttributedStringKey.strokeWidth.rawValue: -3.0//neg. value allows for both stroke and fill
+        ]
+        tf.delegate = memeTextDelegate
+        tf.textColor = UIColor.white
+        tf.tintColor = UIColor.white
+        tf.textAlignment = .center
+        tf.text = text
+    }
+    
     func resetNavElements(buttonsEnabled: Bool){
+        topTextfield.isEnabled = buttonsEnabled
+        bottomTextfield.isEnabled = buttonsEnabled
         shareButton.isEnabled = buttonsEnabled
         cancelButton.isEnabled = buttonsEnabled
         movementAllowed = buttonsEnabled
@@ -90,25 +81,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     //MARK: Image items
-    @IBAction func pickImage(_ sender: UIBarButtonItem) {
+    @IBAction func libraryAction(_ sender: UIBarButtonItem) {
+        print("library")
+        pickImageWithLibraryOrCamera(source: .photoLibrary)
+    }
+    
+    @IBAction func cameraAction(_ sender: UIBarButtonItem) {
+        print("camera")
+        pickImageWithLibraryOrCamera(source: .camera)
+    }
+    
+    func pickImageWithLibraryOrCamera(source: UIImagePickerControllerSourceType) {
         if imagePickerView.image != nil {
             imagePickerView.transform = CGAffineTransform.identity
         }
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        
-        //tag property set for each button in IB
-        switch sender.tag {
-        case 0:
-            print("library")
-            imagePicker.sourceType = .photoLibrary
-        case 1:
-            print("camera")
-            imagePicker.sourceType = .camera
-        default:
-            print("no item selected")
-        }
-        present(imagePicker,animated: true, completion: nil)
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = source
+        present(imagePicker, animated: true, completion: nil)
     }
     
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
