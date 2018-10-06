@@ -144,17 +144,24 @@ class GenerateMemeViewController: UIViewController, UIImagePickerControllerDeleg
     @IBAction func shareMeme(_ sender: UIBarButtonItem) {
         let image = generateMemedImage()
         
-        let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil);
+        let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        //check if device is ipad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            controller.modalPresentationStyle = UIModalPresentationStyle.popover
+            controller.preferredContentSize = CGSize(width: 0, height: 0)
+            controller.popoverPresentationController?.barButtonItem = sender
+        }
+
         controller.completionWithItemsHandler = {
             (activity, success, items, error) in
-            if(success && error == nil){
+            if success && error == nil {
                 print("completed \(activity as Any) \(success) \(items as Any) \(error as Any)")
                 self.save(newMeme: image)
                 self.dismiss(animated: true, completion: nil);
             }
-            else if (error != nil){
+            else if error != nil{
                 //log the error
-                print("error \(error as Any)")
+                print("error msg is: \(error as Any)")
             }
         }
         present(controller, animated: true)
